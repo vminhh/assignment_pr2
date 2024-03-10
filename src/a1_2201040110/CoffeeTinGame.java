@@ -1,7 +1,6 @@
 package a1_2201040110;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class CoffeeTinGame {
 
@@ -37,11 +36,9 @@ public class CoffeeTinGame {
             }
 
             final char last = (greens % 2 == 1) ? GREEN : BLUE;
-
             System.out.printf("%nTIN (%d Gs): %s %n", greens, Arrays.toString(tin));
 
             char lastBean = tinGame(tin);
-
             System.out.printf("tin after: %s %n", Arrays.toString(tin));
 
             if (lastBean == last) {
@@ -54,7 +51,6 @@ public class CoffeeTinGame {
 
     public static char tinGame(char[] tin) {
         while (hasAtLeastTwoBeans(tin)) {
-
             char[] twoBeans = takeTwo(tin);
             char b1 = twoBeans[0];
             char b2 = twoBeans[1];
@@ -65,21 +61,11 @@ public class CoffeeTinGame {
                 putIn(tin, GREEN);
             }
         }
+
         return anyBean(tin);
     }
 
     public static char takeOne(char[] tin) {
-        /*
-         * for (int i = 0; i < tin.length; i++) {
-         * char bean = tin[i];
-         * if (bean != REMOVED) {
-         * tin[i] = REMOVED;
-         * return bean;
-         * }
-         * }
-         * return NULL;
-         */
-
         int idx = randInt(tin.length);
         char bean = tin[idx];
         tin[idx] = REMOVED;
@@ -94,7 +80,7 @@ public class CoffeeTinGame {
     public static char getBean(char[] beansBag, char beanType) {
         int idx = randInt(beansBag.length);
         char selectedBean = beansBag[idx];
-        
+
         while (selectedBean == beanType) {
             beansBag[idx] = REMOVED;
             return selectedBean;
@@ -114,7 +100,6 @@ public class CoffeeTinGame {
             if (bean != REMOVED) {
                 count++;
             }
-
             if (count >= 2)
                 return true;
         }
