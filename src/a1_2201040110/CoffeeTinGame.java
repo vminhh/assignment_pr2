@@ -8,12 +8,12 @@ public class CoffeeTinGame {
     private static final char BLUE = 'B';
     private static final char REMOVED = '-';
     private static final char NULL = '\u0000';
-    private static final char[] Beansbag = new char[30];
+    private static final char[] Beansbag = new char[300];
 
     static {
-        Arrays.fill(Beansbag, 0, 10, GREEN);
-        Arrays.fill(Beansbag, 10, 20, BLUE);
-        Arrays.fill(Beansbag, 20, 30, REMOVED);
+        Arrays.fill(Beansbag, 0, 100, GREEN);
+        Arrays.fill(Beansbag, 100, 200, BLUE);
+        Arrays.fill(Beansbag, 200, 300, REMOVED);
     }
 
     public static void main(String[] args) {
@@ -55,11 +55,7 @@ public class CoffeeTinGame {
             char b1 = twoBeans[0];
             char b2 = twoBeans[1];
 
-            if (b1 == b2) {
-                putIn(tin, BLUE);
-            } else {
-                putIn(tin, GREEN);
-            }
+            updateTin(tin, b1, b2);
         }
 
         return anyBean(tin);
@@ -68,13 +64,16 @@ public class CoffeeTinGame {
     public static char takeOne(char[] tin) {
         int idx = randInt(tin.length);
         char bean = tin[idx];
-        tin[idx] = REMOVED;
-        return bean;
+        if (bean != REMOVED) {
+            tin[idx] = REMOVED;
+            return bean;
+        }
+
+        return NULL;
     }
 
     public static int randInt(int n) {
-        Random rnd = new Random();
-        return rnd.nextInt(n);
+        return (int) (Math.random() * n);
     }
 
     public static char getBean(char[] beansBag, char beanType) {
@@ -90,7 +89,7 @@ public class CoffeeTinGame {
     }
 
     public static void updateTin(char[] tin, char beanOne, char beanTwo) {
-        char newBean = getBean(Beansbag, beanOne == beanTwo ? BLUE : GREEN);
+        char newBean = getBean(tin, beanOne == beanTwo ? BLUE : GREEN);
         putIn(tin, newBean);
     }
 
