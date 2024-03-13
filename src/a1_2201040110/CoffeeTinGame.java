@@ -8,12 +8,12 @@ public class CoffeeTinGame {
     private static final char BLUE = 'B';
     private static final char REMOVED = '-';
     private static final char NULL = '\u0000';
-    private static final char[] Beansbag = new char[300];
+    private static final char[] BeansBag = new char[300];
 
     static {
-        Arrays.fill(Beansbag, 0, 100, GREEN);
-        Arrays.fill(Beansbag, 100, 200, BLUE);
-        Arrays.fill(Beansbag, 200, 300, REMOVED);
+        Arrays.fill(BeansBag, 0, 100, GREEN);
+        Arrays.fill(BeansBag, 100, 200, BLUE);
+        Arrays.fill(BeansBag, 200, 300, REMOVED);
     }
 
     public static void main(String[] args) {
@@ -89,7 +89,7 @@ public class CoffeeTinGame {
     }
 
     public static void updateTin(char[] tin, char beanOne, char beanTwo) {
-        char newBean = getBean(tin, beanOne == beanTwo ? BLUE : GREEN);
+        char newBean = getBean(BeansBag, beanOne == beanTwo ? BLUE : GREEN);
         putIn(tin, newBean);
     }
 
