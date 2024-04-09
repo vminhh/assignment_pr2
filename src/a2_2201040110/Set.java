@@ -21,6 +21,7 @@ import utils.collections.Collection;
 public class Set<T> implements Collection<T> {
 	@DomainConstraint(type = "Vector", optional = false)
 	private Vector<T> elements; // use generic syntax
+	public int year;
 
 	// constructor methods
 	/**

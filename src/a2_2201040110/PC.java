@@ -50,23 +50,83 @@ public class PC {
      */
 
     public String getModel() {
-        return model;
+        return this.model;
     }
 
     public Integer getYear() {
-        return year;
+        return this.year;
     }
 
     public String getManufacturer() {
-        return manufacturer;
+        return this.manufacturer;
+    }
+
+    public Set<String> getComps() {
+        return this.comps;
     }
 
     /**
-     * @setter
-     *         return comps
+     * @modify this.model
+     *         if newModel is valid
+     *         model = nModel
+     *         return true
+     *         else
+     *         return flase
      */
-    public Set<String> getComps() {
-        return comps;
+    public boolean setModel(String newModel) {
+        if (validModel(newModel)) {
+            this.model = newModel;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @modify this.year
+     *         if newYear is valid
+     *         year = newYear
+     *         return true
+     *         else
+     *         return flase
+     */
+    public boolean setYear(int newYear) {
+        if (validYear(newYear)) {
+            this.year = newYear;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @modify this.manufacturer
+     *         if newManufacturer is valid
+     *         manufacturer = newManufacturer
+     *         return true
+     *         else
+     *         return flase
+     */
+    public boolean setManufacturer(String newManufacturer) {
+        if (validManufacturer(newManufacturer)) {
+            this.manufacturer = newManufacturer;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @modify this.comps
+     *         if newComps is valid
+     *         comps = newComps
+     *         return true
+     *         else
+     *         return flase
+     */
+    public boolean setComps(Set<String> newComps) {
+        if (validComps(newComps)) {
+            this.comps = newComps;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -92,23 +152,40 @@ public class PC {
         return comps != null && comps.size() != 0;
     }
 
+    /**
+     * @effects
+     *          if this satisfies abstract properties
+     *          return true
+     *          else
+     *          return false
+     */
+    public boolean repOK() {
+        if (validModel(this.model) && validYear(this.year) && validManufacturer(this.manufacturer)
+                && validComps(this.comps)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof PC))
+            return false;
+
+        PC pc = (PC) o;
+        return getYear() == pc.getYear()
+                && getModel().equals(pc.getModel())
+                && getManufacturer().equals(pc.getManufacturer())
+                && getComps().equals(pc.getComps());
+    }
+    // equals này k biết đúng k
+
     @Override
     public String toString() {
-        return String.format("%-20s %-5d %-15s %s", model, year, manufacturer, comps);
+        return String.format("%15s %5d %10s %s", model, year, manufacturer, comps);
     }
     // cái toString này chắc sửa sau vậy
 
-
-
-    /**
-     * hàm main này chỉ để test thử thôi
-     */
-    public static void main(String[] args) {
-        Set<String> comps = new Set<>();
-        comps.insert("hii");
-        comps.insert("uuu");
-
-        PC test = new PC("TUF Gaming A15", 2024, "ASUS", comps);
-        System.out.println(test);
-    }
 }
