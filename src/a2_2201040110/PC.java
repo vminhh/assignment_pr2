@@ -26,10 +26,15 @@ public class PC {
 
     /**
      * @effects
-     *          if model year manufacturer comps is valid
-     *          initial it
+     * 
+     *          <pre>
+     *          if 
+     *              model year manufacturer comps is valid
+     *              initial it
      *          else
-     *          throws NotPossibalException
+     *              throws NotPossibalException
+     * 
+     *          </pre>
      */
     public PC(String model, int year, String manufacturer, Set<String> comps) throws NotPossibleException {
         if (validModel(model) && validYear(year) && validManufacturer(manufacturer) && validComps(comps)) {
@@ -67,11 +72,16 @@ public class PC {
 
     /**
      * @modify this.model
-     *         if newModel is valid
-     *         model = nModel
-     *         return true
-     *         else
-     *         return flase
+     * 
+     *         <pre>
+     *     if 
+     *      newModel is valid
+     *      model = nModel
+     *      return true
+     *     else
+     *       return flase
+     * 
+     *         </pre>
      */
     public boolean setModel(String newModel) {
         if (validModel(newModel)) {
@@ -83,11 +93,16 @@ public class PC {
 
     /**
      * @modify this.year
-     *         if newYear is valid
-     *         year = newYear
-     *         return true
-     *         else
-     *         return flase
+     * 
+     *         <pre>
+     *     if 
+     *       newYear is valid
+     *       year = newYear
+     *       return true
+     *     else
+     *       return flase
+     * 
+     *         </pre>
      */
     public boolean setYear(int newYear) {
         if (validYear(newYear)) {
@@ -99,11 +114,16 @@ public class PC {
 
     /**
      * @modify this.manufacturer
-     *         if newManufacturer is valid
-     *         manufacturer = newManufacturer
-     *         return true
-     *         else
-     *         return flase
+     * 
+     *         <pre>
+     *      if 
+     *       newManufacturer is valid
+     *       manufacturer = newManufacturer
+     *       return true
+     *      else
+     *        return flase
+     * 
+     *         </pre>
      */
     public boolean setManufacturer(String newManufacturer) {
         if (validManufacturer(newManufacturer)) {
@@ -115,11 +135,16 @@ public class PC {
 
     /**
      * @modify this.comps
-     *         if newComps is valid
+     * 
+     *         <pre>
+     *       if 
+     *         newComps is valid
      *         comps = newComps
-     *         return true
-     *         else
+     *        return true
+     *       else
      *         return flase
+     * 
+     *         </pre>
      */
     public boolean setComps(Set<String> newComps) {
         if (validComps(newComps)) {
@@ -131,10 +156,15 @@ public class PC {
 
     /**
      * @Validation
-     *             if model year manufacturer comps is valid
+     * @effects
+     * 
+     *          <pre>
+     *        if model year manufacturer comps is valid
      *             return true
-     *             else
+     *        else
      *             return fasle
+     * 
+     *          </pre>
      */
     private boolean validModel(String model) {
         return model != null && model.length() <= 20;
@@ -154,10 +184,14 @@ public class PC {
 
     /**
      * @effects
-     *          if this satisfies abstract properties
+     * 
+     *          <pre>
+     *    if this satisfies abstract properties
      *          return true
-     *          else
+     *    else
      *          return false
+     * 
+     *          </pre>
      */
     public boolean repOK() {
         if (validModel(this.model) && validYear(this.year) && validManufacturer(this.manufacturer)
@@ -181,11 +215,11 @@ public class PC {
                 && getComps().equals(pc.getComps());
     }
     // equals này k biết đúng k
+    // làm giống override bên Set class
 
     @Override
     public String toString() {
-        return String.format("%15s %5d %10s %s", model, year, manufacturer, comps);
+        return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(),
+                getComps().getElements().toString());
     }
-    // cái toString này chắc sửa sau vậy
-
 }

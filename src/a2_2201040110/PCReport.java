@@ -1,7 +1,6 @@
 package a2_2201040110;
 
 import utils.TextIO;
-import java.util.*;
 
 public class PCReport {
     public String displayReport(PC[] objs) {
@@ -12,6 +11,7 @@ public class PCReport {
             report.append("-");
         }
 
+        // create "PCPROG REPORT"
         report.append(
                 "\n                                           PCPROG  REPORT                                           \n");
 
@@ -19,15 +19,35 @@ public class PCReport {
         for (int i = 0; i < 99; i++) {
             report.append("-");
         }
+        report.append("\n");
 
-        // create formatted and width: ordinal number (3), model (20), year (6),
-        // manufacturer (15), components (as a string)
-        String ordinalFormat = "%3s",
-                modelFormat = "%20s",
-                yearFormat = "%6s",
-                manufacturerFormat = "%15s",
-                compsFormat = "%s";
+        /**
+         * <pre>
+          * create a table
+          *  print line with formatted ordinal, model, year, manufacturer, comps (toString in PC class)
+          *      formatted and width:
+          *          ordinal number (3)
+          *          model (20)
+          *          year (6)
+          *          manufacturer (15)
+          *          components (as a string)
+         * </pre>
+         */
 
-        // mai lam tiep
+        for (int i = 0; i < objs.length; i++) {
+            PC pc = objs[i];
+
+            report.append(String.format("%3d", i + 1)).append(" ")
+                    .append(pc.toString()).append("\n");
+        }
+
+        // create hyphen at the end
+        for (int i = 0; i < 99; i++) {
+            report.append("-");
+        }
+
+        // convert to String
+        TextIO.putln(report);
+        return report.toString();
     }
 }

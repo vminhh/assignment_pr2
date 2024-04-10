@@ -144,10 +144,10 @@ public class Set<T> implements Collection<T> {
 		return -1;
 	}
 
-	@Override // changed 3.57PM 8/4/2024
-	public String toString() {
+	@Override
+	public String toString() {// changed 4.45PM 10/4/2024
 		if (size() == 0)
-			return "[ ]";
+			return "[ ]"; // thay cho giống Listing 1 =))
 
 		String s = "[" + elements.elementAt(0).toString();
 		for (int i = 1; i < size(); i++) {
@@ -194,4 +194,3 @@ public class Set<T> implements Collection<T> {
 		return getElements().equals(set.getElements());
 	}
 }
-
