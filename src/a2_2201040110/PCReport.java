@@ -1,24 +1,23 @@
 package a2_2201040110;
 
-import utils.TextIO;
-
 public class PCReport {
     public String displayReport(PC[] objs) {
         StringBuilder report = new StringBuilder();
 
         // create hyphen above the TITLE
-        for (int i = 0; i < 99; i++) {
+        for (int i = 1; i < 100; i++) {
             report.append("-");
         }
 
         // create "PCPROG REPORT"
         report.append(
-                "\n                                           PCPROG  REPORT                                           \n");
+                "\n                                           PCPROG REPORT                                           \n");
 
         // create hyphen below PCPROG REPORT
-        for (int i = 0; i < 99; i++) {
+        for (int i = 1; i < 100; i++) {
             report.append("-");
         }
+
         report.append("\n");
 
         /**
@@ -36,18 +35,16 @@ public class PCReport {
 
         for (int i = 0; i < objs.length; i++) {
             PC pc = objs[i];
-
-            report.append(String.format("%3d", i + 1)).append(" ")
+            report.append(String.format("%3d ", i + 1))
                     .append(pc.toString()).append("\n");
         }
 
         // create hyphen at the end
-        for (int i = 0; i < 99; i++) {
+        for (int i = 1; i < 100; i++) {
             report.append("-");
         }
 
-        // convert to String
-        TextIO.putln(report);
+        // covert to String
         return report.toString();
     }
 }
