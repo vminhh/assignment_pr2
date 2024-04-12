@@ -188,8 +188,10 @@ public class Set<T> implements Collection<T> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Set)) return false;
+		if (this == o)
+			return true;
+		if (!(o instanceof Set))
+			return false;
 		Set<?> set = (Set<?>) o;
 		return getElements().equals(set.getElements());
 	}

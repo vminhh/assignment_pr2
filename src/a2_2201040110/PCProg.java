@@ -39,11 +39,10 @@ public class PCProg {
 	 *          <pre>
 	 * get data from user input
 	 * 		create a while loop
-	 * 			get data from user
-	 * 				if user want to stop add component 
-	 * 					press enter (data will be a blank line)
-	 * 				else
-	 * 					continue adding
+	 * 			if user want to stop add component 
+	 * 				press enter (data will be a blank line)
+	 * 			else
+	 * 				continue adding
 	 * 		while loop exit
 	 *	
 	 * create a newPC and add it in objs
@@ -54,17 +53,17 @@ public class PCProg {
 	 *          </pre>
 	 */
 	public void createObjects() {
-		TextIO.putln("Enter your model ");
+		TextIO.putln("Enter the model");
 		String model = TextIO.getlnString();
 
-		TextIO.putln("Enter year released ");
+		TextIO.putln("Enter year released");
 		int year = TextIO.getlnInt();
 
-		TextIO.putln("Enter the manufacturer ");
+		TextIO.putln("Enter the manufacturer");
 		String manufacturer = TextIO.getlnString();
 
-		TextIO.putln("Enter the components ");
-		TextIO.putln("Notice that Can't enter the duplicate components. Press Enter to stop add.");
+		TextIO.putln("Enter the components");
+		TextIO.putln("Notice that Can't add the duplicate components. Press ENTER to stop adding.");
 		Set<String> comps = new Set<>();
 		boolean hasNextComps = true;
 
@@ -75,7 +74,7 @@ public class PCProg {
 				hasNextComps = false;
 			} else {
 				comps.insert(comp);
-				TextIO.putln("Continue to add component? Press enter to stop.");
+				TextIO.putln("Continue to add component? Press ENTER to stop.");
 			}
 		}
 
@@ -93,7 +92,7 @@ public class PCProg {
 	/**
 	 * @effects
 	 *          return PC obj with size of objs (number of PC made)
-	 *          covert obj to Array
+	 *          covert obj to array
 	 */
 	public PC[] getObjects() {
 		return objs.getElements().toArray(new PC[objs.size()]);
@@ -158,4 +157,18 @@ public class PCProg {
 		putln("~END~");
 	}
 
+	/**
+	 * My test
+	 * 
+	 * <pre>
+	 * 	---------------------------------------------------------------------------------------------------
+	 *                                      PCPROG REPORT                                           
+	 *	---------------------------------------------------------------------------------------------------
+	 *	  1  Gaming Legion Pro 5   2024          Lenovo [i9 14900HX, 32 GB DDR5, SSD 1TB, NVIDIA RTX 4060]
+	 *	  2          Vivobook 14   2024            ASUS [i7-1255U, 16GB DDR4, SSD 512GB, Itel Iris Xe]
+	 *	  3                 Minh   2004            Hanu [Platinum blonde hair, 2 eyes, 1 nose, 2 ears]
+	 *	---------------------------------------------------------------------------------------------------
+	 *
+	 * </pre>
+	 */
 }

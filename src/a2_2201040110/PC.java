@@ -15,11 +15,14 @@ import utils.*;
  *         String, year is Integer, manufacturer is String, and comps is a set
  *         of Strings.
  * 
- * @abstract_properties mutable(model)=false /\ mutable(year)=false /\
- *                      mutable(manufacturer)=false /\ mutable(comps)=true /\
- *                      optional(model)=false /\ optional(year)=false /\
- *                      optional(manufacturer)=false /\ optional(comps)=false
+ * @abstract_properties
  * 
+ *                      <pre>
+ *  mutable(model) = true /\ optional (model) = false /\ length (model) = 20
+ *  mutable(year) = false /\ optional (year) = false /\ min(year) = 1984
+ *  mutable(manufacturer) = false /\ optional (manufacturer) = false /\ length (year) = 15
+ *  mutable(comps) = true /\ optional (comps) = false
+ *                      </pre>
  */
 
 public class PC {
@@ -39,8 +42,8 @@ public class PC {
      *          </pre>
      */
     public PC(String model, int year, String manufacturer, Set<String> comps) throws NotPossibleException {
-        if (!repOK()) {
-            throw new NotPossibleException("Invalid data!");
+        if (!validModel(model) || !validYear(year) || !validManufacturer(manufacturer) || !validComps(comps)) {
+            throw new NotPossibleException("INVALID DATA!");
         }
 
         this.model = model;
@@ -91,46 +94,6 @@ public class PC {
     public boolean setModel(String newModel) {
         if (validModel(newModel)) {
             this.model = newModel;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @modify this.year
-     * 
-     *         <pre>
-     * if newYear is valid
-     *   year = newYear
-     *   return true
-     * else
-     *   return flase
-     *         </pre>
-     */
-    public boolean setYear(int newYear) {
-        if (validYear(newYear)) {
-            this.year = newYear;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @modify this.manufacturer
-     * 
-     *         <pre>
-     * if newManufacturer is valid
-     *    manufacturer = newManufacturer
-     *    return true
-     * else
-     *    return flas
-     *         </pre>
-     */
-    public boolean setManufacturer(String newManufacturer) {
-        if (validManufacturer(newManufacturer)) {
-            this.manufacturer = newManufacturer;
             return true;
         }
 
@@ -210,7 +173,7 @@ public class PC {
      * if comps is not null and not empty 
      *   return true
      * else
-     *  return false
+     *   return false
      *          </pre>
      */
     private boolean validComps(Set<String> comps) {
@@ -229,10 +192,10 @@ public class PC {
      *          </pre>
      */
     public boolean repOK() {
-        return validModel(this.model)
-                && validYear(this.year)
-                && validManufacturer(this.manufacturer)
-                && validComps(this.comps);
+        return validModel(getModel())
+                && validYear(getYear())
+                && validManufacturer(getManufacturer())
+                && validComps(getComps());
     }
 
     @Override
