@@ -3,13 +3,13 @@ package a2_2201040110;
 import utils.*;
 
 /**
- * @overview Represents basic attributes of personal computers (PCs).
+ * @overview Represent basic attributes of personal computers (PCs).
  * 
  * @attributes
  *             model String
  *             year Integer
- *             manufacturer
- *             String comps Set(String)
+ *             manufacturer String
+ *             comps Set(String)
  * 
  * @object A typical PC is {model, year, manufacturer, comps}, where model is
  *         String, year is Integer, manufacturer is String, and comps is a set
@@ -26,9 +26,16 @@ import utils.*;
  */
 
 public class PC {
+    @DomainConstraint(type = "String", mutable = true, optional = false)
     private String model;
+
+    @DomainConstraint(type = "Integer", mutable = false, optional = false)
     private int year;
+
+    @DomainConstraint(type = "String", mutable = false, optional = false)
     private String manufacturer;
+
+    @DomainConstraint(type = "Set<String", mutable = true, optional = false)
     private Set<String> comps;
 
     /**
@@ -38,13 +45,10 @@ public class PC {
      * if data of all attributes are valid
      *   initialize them
      * else
-     *   throws NotPossibalException
+     *   throws NotPossibleException
      *          </pre>
      */
     public PC(String model, int year, String manufacturer, Set<String> comps) throws NotPossibleException {
-        if (!validModel(model) || !validYear(year) || !validManufacturer(manufacturer) || !validComps(comps)) {
-            throw new NotPossibleException("INVALID DATA!");
-        }
 
         this.model = model;
         this.year = year;
@@ -86,18 +90,16 @@ public class PC {
      *         <pre>
      * if newModel is valid
      *   model = newModel
-     *   return true
      * else
-     *   return flase
+     *   throw IllegalAgrumentException
      *         </pre>
      */
-    public boolean setModel(String newModel) {
-        if (validModel(newModel)) {
-            this.model = newModel;
-            return true;
+    public void setModel(String newModel) {
+        if (!isModel(newModel)) {
+            throw new IllegalArgumentException("Model can't be null or bigger than 20 characters!");
         }
 
-        return false;
+        this.model = newModel;
     }
 
     /**
@@ -106,18 +108,16 @@ public class PC {
      *         <pre>
      * if newComps is valid
      *      comps = newComps
-     *      return true
      * else
-     *      return flase
+     *      throw IllegalAgrumentException
      *         </pre>
      */
-    public boolean setComps(Set<String> newComps) {
-        if (validComps(newComps)) {
-            this.comps = newComps;
-            return true;
+    public void setComps(Set<String> newComps) {
+        if (!isComponent(newComps)) {
+            throw new IllegalArgumentException("Component can't be null or empty!");
         }
 
-        return false;
+        this.comps = newComps;
     }
 
     /**
@@ -131,7 +131,7 @@ public class PC {
      *   return false
      *          </pre>
      */
-    private boolean validModel(String model) {
+    private boolean isModel(String model) {
         return model != null && model.length() <= 20;
     }
 
@@ -146,7 +146,7 @@ public class PC {
      *   return false
      *          </pre>
      */
-    private boolean validYear(int year) {
+    private boolean isYear(int year) {
         return year >= 1984;
     }
 
@@ -161,7 +161,7 @@ public class PC {
      *    return false
      *          </pre>
      */
-    private boolean validManufacturer(String manufacturer) {
+    private boolean isManufacturer(String manufacturer) {
         return manufacturer != null && manufacturer.length() <= 15;
     }
 
@@ -176,7 +176,7 @@ public class PC {
      *   return false
      *          </pre>
      */
-    private boolean validComps(Set<String> comps) {
+    private boolean isComponent(Set<String> comps) {
         return comps != null && comps.size() != 0;
     }
 
@@ -192,10 +192,10 @@ public class PC {
      *          </pre>
      */
     public boolean repOK() {
-        return validModel(getModel())
-                && validYear(getYear())
-                && validManufacturer(getManufacturer())
-                && validComps(getComps());
+        return isModel(getModel())
+                && isYear(getYear())
+                && isManufacturer(getManufacturer())
+                && isComponent(getComps());
     }
 
     @Override
