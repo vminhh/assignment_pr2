@@ -1,9 +1,13 @@
 package a2_2201040110;
 
+import java.util.*;
+
 import utils.*;
 
 /**
- * @overview Represent basic attributes of personal computers (PCs).
+ * @overview
+ *           PC object with the specified model, year, manufacturer, and
+ *           components.
  * 
  * @attributes
  *             model String
@@ -26,60 +30,41 @@ import utils.*;
  */
 
 public class PC {
-    @DomainConstraint(type = "String", mutable = true, optional = false)
+    @DomainConstraint(mutable = true, optional = false)
     private String model;
 
-    @DomainConstraint(type = "Integer", mutable = false, optional = false)
+    @DomainConstraint(mutable = false, optional = false)
     private int year;
 
-    @DomainConstraint(type = "String", mutable = false, optional = false)
+    @DomainConstraint(mutable = false, optional = false)
     private String manufacturer;
 
-    @DomainConstraint(type = "Set<String", mutable = true, optional = false)
+    @DomainConstraint(mutable = true, optional = false)
     private Set<String> comps;
 
     /**
-     * @effects
-     * 
-     *          <pre>
-     * if data of all attributes are valid
-     *   initialize them
-     * else
-     *   throws NotPossibleException
-     *          </pre>
+     * @effects initialize all atributes then validate them
      */
-    public PC(String model, int year, String manufacturer, Set<String> comps) throws NotPossibleException {
-
+    public PC(String model, int year, String manufacturer, Set<String> comps) {
         this.model = model;
         this.year = year;
         this.manufacturer = manufacturer;
         this.comps = comps;
+        validateData();
     }
 
-    /**
-     * @return model data
-     */
     public String getModel() {
         return this.model;
     }
 
-    /**
-     * @return year data
-     */
     public int getYear() {
         return this.year;
     }
 
-    /**
-     * @return manufacturer data
-     */
     public String getManufacturer() {
         return this.manufacturer;
     }
 
-    /**
-     * @return Set(String) comps data
-     */
     public Set<String> getComps() {
         return this.comps;
     }
@@ -88,36 +73,27 @@ public class PC {
      * @modify this.model
      * 
      *         <pre>
-     * if newModel is valid
-     *   model = newModel
-     * else
+     * if newModel is not valid
      *   throw IllegalAgrumentException
+     * else
+     *   this.model = newModel
      *         </pre>
      */
     public void setModel(String newModel) {
         if (!isModel(newModel)) {
-            throw new IllegalArgumentException("Model can't be null or bigger than 20 characters!");
+            throw new IllegalArgumentException("Model name's should not be empty or shorter than 20 characters!");
         }
 
         this.model = newModel;
     }
 
     /**
-     * @modify this.comps
-     * 
-     *         <pre>
-     * if newComps is valid
-     *      comps = newComps
-     * else
-     *      throw IllegalAgrumentException
-     *         </pre>
+     * @effects add respectively element of newComps to this.comps
      */
     public void setComps(Set<String> newComps) {
-        if (!isComponent(newComps)) {
-            throw new IllegalArgumentException("Component can't be null or empty!");
+        for (String comp : newComps.getElements()) {
+            this.comps.insert(comp);
         }
-
-        this.comps = newComps;
     }
 
     /**
@@ -125,14 +101,14 @@ public class PC {
      * @effects
      * 
      *          <pre>
-     * if model name is not empty and shorter than 20 characters
+     * if model name is not blank and shorter than 20 characters
      *   return true
      * else
      *   return false
      *          </pre>
      */
     private boolean isModel(String model) {
-        return model != null && model.length() <= 20;
+        return !isBlank(model) && model.length() <= 20;
     }
 
     /**
@@ -155,66 +131,63 @@ public class PC {
      * @effects
      * 
      *          <pre>
-     * if manufacturer is not empty and shorter than 15 characters
+     * if manufacturer is not blank and shorter than 15 characters
      *    return true
      * else
      *    return false
      *          </pre>
      */
     private boolean isManufacturer(String manufacturer) {
-        return manufacturer != null && manufacturer.length() <= 15;
+        return !isBlank(manufacturer) && manufacturer.length() <= 15;
     }
 
     /**
-     * @param comps will be validated
-     * @effects
+     * isBlank is a method was introduced in Java 11, but i must use jdk 8 :((
      * 
-     *          <pre>
-     * if comps is not null and not empty 
-     *   return true
-     * else
-     *   return false
-     *          </pre>
+     * @return string is blank or empty or contains only white spaces
      */
-    private boolean isComponent(Set<String> comps) {
-        return comps != null && comps.size() != 0;
+    private boolean isBlank(String str) {
+        return str == null || str.trim().isEmpty();
     }
 
     /**
      * @effects
      * 
      *          <pre>
-     *    if this satisfies abstract properties
-     *          return true
-     *    else
-     *          return false
-     * 
+     * the method will validate respectively attributes
+     *      if they are not valid
+     *          throw IllegalAgurmentException
      *          </pre>
      */
-    public boolean repOK() {
-        return isModel(getModel())
-                && isYear(getYear())
-                && isManufacturer(getManufacturer())
-                && isComponent(getComps());
+    public void validateData() {
+        if (!isModel(this.model))
+            throw new IllegalArgumentException("Model name's should not be empty or shorter than 20 characters!");
+
+        if (!isYear(this.year))
+            throw new IllegalArgumentException("The year should begin with 1984!");
+
+        if (!isManufacturer(this.manufacturer))
+            throw new IllegalArgumentException(
+                    "Manufacturer name's should not be empty or shorter than 15 characters!");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Object))
+            return false;
+
+        PC pc = (PC) obj;
+        return this.year == pc.year
+                && this.model.equals(pc.model)
+                && this.manufacturer.equals(pc.manufacturer)
+                && this.comps.equals(pc.comps);
     }
 
     @Override
     public String toString() {
-        return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(),
-                getComps().getElements().toString());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof PC))
-            return false;
-
-        PC pc = (PC) o;
-        return getYear() == pc.getYear()
-                && getModel().equals(pc.getModel())
-                && getManufacturer().equals(pc.getManufacturer())
-                && getComps().equals(pc.getComps());
+        return String.format("%20s %6d %15s %s", this.model, this.year, this.manufacturer,
+                this.comps.getElements() != null ? this.comps.getElements() : Arrays.toString(new String[0]));
     }
 }

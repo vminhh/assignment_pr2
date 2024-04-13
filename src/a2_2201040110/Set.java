@@ -21,7 +21,6 @@ import utils.collections.Collection;
 public class Set<T> implements Collection<T> {
 	@DomainConstraint(type = "Vector", optional = false)
 	private Vector<T> elements; // use generic syntax
-	public int year;
 
 	// constructor methods
 	/**
@@ -145,16 +144,16 @@ public class Set<T> implements Collection<T> {
 	}
 
 	@Override
-	public String toString() {// changed 4.45PM 10/4/2024
+	public String toString() {
 		if (size() == 0)
-			return "[ ]"; // thay cho giống Listing 1 =))
+			return "Set{ }";
 
-		String s = "[" + elements.elementAt(0).toString();
+		String s = "Set{" + elements.elementAt(0).toString();
 		for (int i = 1; i < size(); i++) {
-			s = s + ", " + elements.elementAt(i).toString();
+			s = s + "," + elements.elementAt(i).toString();
 		}
 
-		return s + "]";
+		return s + "}";
 	}
 
 	/**

@@ -1,12 +1,17 @@
 package a2_2201040110;
 
-import static utils.TextIO.*;
+import static utils.TextIO.getln;
+import static utils.TextIO.getlnInt;
+import static utils.TextIO.getlnString;
+import static utils.TextIO.putln;
+import static utils.TextIO.putf;
+import static utils.TextIO.writeFile;
+import static utils.TextIO.writeStandardOutput;
 
 import java.util.*;
 
 import utils.DomainConstraint;
 import utils.NotPossibleException;
-import utils.TextIO;
 
 /**
  * @overview PCProg is a program that captures data about PC objects and
@@ -40,7 +45,7 @@ public class PCProg {
 	 * get data from user input
 	 * 		create a while loop
 	 * 			if user want to stop add component 
-	 * 				press enter (data will be a blank line)
+	 * 				enter a blank line
 	 * 			else
 	 * 				continue adding
 	 * 		while loop exit
@@ -53,38 +58,43 @@ public class PCProg {
 	 *          </pre>
 	 */
 	public void createObjects() {
-		TextIO.putln("Enter the model");
-		String model = TextIO.getlnString();
+		putln("Enter the model");
+		String model = getlnString();
 
-		TextIO.putln("Enter year released");
-		int year = TextIO.getlnInt();
+		putln("Enter year released");
+		int year = getlnInt();
 
-		TextIO.putln("Enter the manufacturer");
-		String manufacturer = TextIO.getlnString();
+		putln("Enter the manufacturer");
+		String manufacturer = getlnString();
 
-		TextIO.putln("Enter the components");
-		TextIO.putln("Notice that Can't add the duplicate components. Press ENTER to stop adding.");
+		putln("Can't add the duplicate components. Enter blank line if you want to stop adding!");
 		Set<String> comps = new Set<>();
-		boolean hasNextComps = true;
 
-		while (hasNextComps) {
-			String comp = TextIO.getln();
+		int idx = 0;
+		while (true) {
+			putf("Enter the components [%d] \n", idx + 1);
+			String comp = getln();
 
-			if (comp.equals("")) {
-				hasNextComps = false;
-			} else {
-				comps.insert(comp);
-				TextIO.putln("Continue to add component? Press ENTER to stop.");
+			if (comp.trim().equals(""))
+				break;
+
+			if (comps.isIn(comp)) {
+				putln("Component is already exist!");
+				continue;
 			}
+
+			comps.insert(comp);
+			++idx;
 		}
 
 		PC newPC = PCFactory.getFactory().createPC(model, year, manufacturer, comps);
 
-		objs.insert(newPC);
+		this.objs.insert(newPC);
 
-		TextIO.putln("Do you want to add another PC? [Y/N] ");
-		boolean Continue = true;
-		if (Continue == TextIO.getln().equals(YES)) {
+		putln("Do you want to add another PC? [Y/N] ");
+		String adding = getln();
+
+		if (adding.equals(YES)) {
 			createObjects();
 		}
 	}
@@ -156,19 +166,4 @@ public class PCProg {
 		}
 		putln("~END~");
 	}
-
-	/**
-	 * My test
-	 * 
-	 * <pre>
-	 * 	---------------------------------------------------------------------------------------------------
-	 *                                      PCPROG REPORT                                           
-	 *	---------------------------------------------------------------------------------------------------
-	 *	  1  Gaming Legion Pro 5   2024          Lenovo [i9 14900HX, 32 GB DDR5, SSD 1TB, NVIDIA RTX 4060]
-	 *	  2          Vivobook 14   2024            ASUS [i7-1255U, 16GB DDR4, SSD 512GB, Itel Iris Xe]
-	 *	  3                 Minh   2004            Hanu [Platinum blonde hair, 2 eyes, 1 nose, 2 ears]
-	 *	---------------------------------------------------------------------------------------------------
-	 *
-	 * </pre>
-	 */
 }
