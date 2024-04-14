@@ -1,12 +1,9 @@
-package a2_2201040110;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
 import utils.NotPossibleException;
-
 /**
  * A program that captures data about PC objects and displays
  * a report about them on the console.
@@ -20,60 +17,6 @@ public class PCProg {
      */
     public PCProg() {
         objs = new Set<>();
-    }
-
-    /**
-     * create objs
-     */
-    public void createObjects() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter the model: ");
-        String model = sc.nextLine();
-
-        System.out.print("Enter the year: ");
-        int year = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Enter the manufacturer: ");
-        String manufacturer = sc.nextLine();
-
-        System.out.println("Add component or press ENTER to stop!");
-        Set<String> comps = new Set<>();
-
-        int idx = 0;
-        while (true) {
-            System.out.printf("Add components [%d]: ", idx + 1);
-            String comp = sc.nextLine();
-
-            if (comp.trim().equals(""))
-                break;
-
-            if (comps.isIn(comp)) {
-                System.out.println("Component is already exist!!");
-                continue;
-            }
-
-            comps.insert(comp);
-            ++idx;
-        }
-
-        PC pc = PCFactory.getFactory().createPC(model, year, manufacturer, comps);
-        this.objs.insert(pc);
-
-        System.out.println("Do you want to add PC? [Y/N]");
-        String toAdd = sc.nextLine();
-
-        if (toAdd.equals(YES)) {
-            createObjects();
-        }
-    }
-
-    /**
-     * get objs
-     */
-    public PC[] getObjects() {
-        return objs.getElements().toArray(new PC[objs.size()]);
     }
 
     /**
