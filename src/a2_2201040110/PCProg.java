@@ -41,6 +41,8 @@ public class PCProg {
         System.out.println("Add component or press ENTER to stop!");
         Set<String> comps = new Set<>();
 
+        PC pc = PCFactory.getFactory().createPC(model, year, manufacturer, comps);
+
         int idx = 0;
         while (true) {
             System.out.printf("Add components [%d]: ", idx + 1);
@@ -54,26 +56,36 @@ public class PCProg {
                 continue;
             }
 
-            comps.insert(comp);
+            pc.addComp(comp);
             ++idx;
         }
 
-        PC pc = PCFactory.getFactory().createPC(model, year, manufacturer, comps);
+        if (!getObjects().isEmpty()) {
+            for (PC obj : getObjects().getElements()) {
+                if (obj.equals(pc)) {
+                    System.out.println("PC is already exist!");
+                    break;
+                }
+            }
+        }
+
         this.objs.insert(pc);
 
         System.out.println("Do you want to add PC? [Y/N]");
-        String toAdd = sc.nextLine();
+        String toAdd = sc.nextLine().toUpperCase();
 
         if (toAdd.equals(YES)) {
             createObjects();
+        } else if (toAdd.equals("N")) {
+            System.out.println("The process has been completed!");
         }
     }
 
     /**
      * get objs
      */
-    public PC[] getObjects() {
-        return objs.getElements().toArray(new PC[objs.size()]);
+    public Set<PC> getObjects() {
+        return this.objs;
     }
 
     /**

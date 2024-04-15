@@ -1,7 +1,6 @@
 ---------------------------------------------------------------------------------------------------
                                            PCPROG REPORT
 ---------------------------------------------------------------------------------------------------
-  1     Nguyen Thanh Dat   2003            Hanu [Duong Khanh Lover's, Chinese]
-  2       Duong Quan Bao   2004            Hanu [Quan Bu, Quan Buu, fan Keo Con]
-  3      Nguyen Kim Dinh   2004            Hanu [Anh toc do, Keo Con, anh yeu Thao Thanh, bu Bui Nga]
+  1                 minh   2122          minsey [amd ryzen 5, 15gb ddr4, 512gb hdd, 512gb sdd, ...]
+  2                minhl   2122          minsey [amd ryzen 5, 15gb ddr4, 512gb hdd, nvidia gefo...]
 ---------------------------------------------------------------------------------------------------

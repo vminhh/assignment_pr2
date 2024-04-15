@@ -40,10 +40,8 @@ public class PC {
         this.model = newModel;
     }
 
-    public void setComps(Set<String> newComps) {
-        for (String comp : newComps.getElements()) {
-            this.comps.insert(comp);
-        }
+    public void addComp(String newComp) {
+        this.comps.insert(newComp);
     }
 
     private boolean isModel(String model) {
@@ -90,7 +88,22 @@ public class PC {
 
     @Override
     public String toString() {
-        return String.format("%20s %6d %15s %s", this.model, this.year, this.manufacturer,
-                this.comps.getElements() != null ? this.comps.getElements() : Arrays.toString(new String[0]));
+        if (getComps().getElements() == null)
+            return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(),
+                    Arrays.toString(new String[0]));
+
+        StringBuilder components = new StringBuilder();
+        components.append("[");
+
+        for (String comp : getComps().getElements()) {
+            components.append(comp).append(", ");
+            if (components.length() > 47) {
+                components = new StringBuilder(components.substring(0, 47));
+                components.append("...]");
+                break;
+            }
+        }
+
+        return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(), components.toString());
     }
 }
