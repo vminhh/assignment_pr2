@@ -1,7 +1,5 @@
 package a2_2201040110;
 
-import java.util.*;
-
 public class PC {
     private String model;
     private int year;
@@ -88,19 +86,22 @@ public class PC {
 
     @Override
     public String toString() {
-        if (getComps().getElements() == null)
-            return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(),
-                    Arrays.toString(new String[0]));
-
         StringBuilder components = new StringBuilder();
-        components.append("[");
 
-        for (String comp : getComps().getElements()) {
-            components.append(comp).append(", ");
-            if (components.length() > 47) {
-                components = new StringBuilder(components.substring(0, 47));
-                components.append("...]");
-                break;
+        if (getComps().isEmpty()) {
+            components.append("[]");
+        }
+
+        else {
+            int lastCharPos = 99 - (3 + 1 + 20 + 1 + 6 + 1 + 15 + 1) - 4;
+
+            for (char c : getComps().getElements().toString().toCharArray()) {
+                components.append(c);
+
+                if (components.length() == lastCharPos) {
+                    components.append("...]");
+                    break;  
+                }
             }
         }
 
