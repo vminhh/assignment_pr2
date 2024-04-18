@@ -38,11 +38,11 @@ public class PCProg {
         System.out.print("Enter the manufacturer: ");
         String manufacturer = sc.nextLine();
 
-        System.out.println("Add component or press ENTER to stop!");
         Set<String> comps = new Set<>();
 
-        PC pc = PCFactory.getFactory().createPC(model, year, manufacturer, comps);
+        PC pc = PCFactory.getInstance().createPC(model, year, manufacturer, comps);
 
+        System.out.println("Add component or press ENTER to stop!");
         int idx = 0;
         while (true) {
             System.out.printf("Add components [%d]: ", idx + 1);
@@ -52,7 +52,7 @@ public class PCProg {
                 break;
 
             if (comps.isIn(comp)) {
-                System.out.println("Component is already exist!!");
+                System.out.println("Component is already exist!");
                 continue;
             }
 
@@ -71,13 +71,11 @@ public class PCProg {
 
         this.objs.insert(pc);
 
-        System.out.println("Do you want to add PC? [Y/N]");
+        System.out.println("Do you want to add another PC? [Y/N]");
         String toAdd = sc.nextLine().toUpperCase();
 
         if (toAdd.equals(YES)) {
             createObjects();
-        } else if (toAdd.equals("N")) {
-            System.out.println("The process has been completed!");
         }
     }
 

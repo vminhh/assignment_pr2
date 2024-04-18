@@ -1,5 +1,9 @@
 ---------------------------------------------------------------------------------------------------
                                            PCPROG REPORT
 ---------------------------------------------------------------------------------------------------
-  1                 minh  12321             qwe [123456789, 987654321, 112233445566778899, 9988...]
+  1          Do Van Minh   2004            Hanu [Blone hair]
+  2     Nguyen Thanh Dat   2003            Hanu [Duong Khanh Lover's, Chinese]
+  3       Duong Quan Bao   2004            Hanu [Duong Quan Bu, Fan keo con Kim Dinh]
+  4      Nguyen Kim Dinh   2004            Hanu [em trai Minh Minh Mo Mong, bu Bui Nga, Keo Con...]
+  5   Thinkpad X1 Carbon   2022          Lenovo [AMD Ryzen 5, 16GB DDR4, 512GB SSD, NVIDIA GEFO...]
 ---------------------------------------------------------------------------------------------------

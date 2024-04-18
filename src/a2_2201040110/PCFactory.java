@@ -4,23 +4,20 @@ package a2_2201040110;
  * Singleton
  */
 public class PCFactory {
-    private static PCFactory factory;
+    private static PCFactory instance;
 
     private PCFactory() {
     }
 
-    public static PCFactory getFactory() {
-        if (factory == null) {
-            factory = new PCFactory();
+    public static PCFactory getInstance() {
+        if (instance == null) {
+            instance = new PCFactory();
         }
 
-        return factory;
+        return instance;
     }
 
     public PC createPC(String model, int year, String manufacturer, Set<String> comps) {
-        if (model == null || manufacturer == null)
-            throw new IllegalArgumentException("Model and manufacturer must not be null!");
-
         return new PC(model, year, manufacturer, comps);
     }
 }
