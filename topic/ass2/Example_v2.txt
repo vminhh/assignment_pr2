@@ -1,0 +1,12 @@
+In case Set length is too big, we will remove apart of the string
+Example:
+ 
+[AMD Ryzen 5, 16GB DDR4, 512GB SSD, 512GB HDD, NVIDIA MX450] -> [AMD Ryzen 5, 16GB DDR4, 512GB SSD, 512GB HDD, ...]
+[AMD Ryzen 5, 16GB DDR4, 512GB SSD, NVIDIA GEFORCE GTX 1650] -> [AMD Ryzen 5, 16GB DDR4, 512GB SSD, NVIDIA GEFO...]
+---------------------------------------------------------------------------------------------------
+                                           PCPROG REPORT
+---------------------------------------------------------------------------------------------------
+  1   Thinkpad X1 Carbon   2022          Lenovo [AMD Ryzen 5, 8GB DDR4, 512GB SSD, NVIDIA MX450]
+  2   Thinkpad X1 Carbon   2022         Toshiba [AMD Ryzen 5, 16GB DDR4, 512GB SSD, 512GB HDD, ...]
+  3   Thinkpad X1 Carbon   2022         Toshiba [AMD Ryzen 5, 16GB DDR4, 512GB SSD, NVIDIA GEFO...]
+---------------------------------------------------------------------------------------------------

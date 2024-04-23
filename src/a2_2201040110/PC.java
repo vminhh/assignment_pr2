@@ -1,12 +1,17 @@
 package a2_2201040110;
 
+import utils.NotPossibleException;
+
+/**
+ * Represents personal computers (PCs).
+ */
 public class PC {
     private String model;
     private int year;
     private String manufacturer;
     private Set<String> comps;
 
-    public PC(String model, int year, String manufacturer, Set<String> comps) {
+    public PC(String model, int year, String manufacturer, Set<String> comps) throws NotPossibleException {
         this.model = model;
         this.year = year;
         this.manufacturer = manufacturer;
@@ -32,7 +37,7 @@ public class PC {
 
     public void setModel(String newModel) {
         if (!isModel(newModel)) {
-            throw new IllegalArgumentException("Model name's should not be empty or shorter than 20 characters!");
+            throw new NotPossibleException("Model name's should not be empty or bigger than 20 characters!");
         }
 
         this.model = newModel;
@@ -54,30 +59,29 @@ public class PC {
         return !isBlank(manufacturer) && manufacturer.length() <= 15;
     }
 
-    private boolean isBlank(String str) {
-        return str == null || str.trim().isEmpty();
+    private boolean isBlank(String s) {
+        return s == null || s.trim().isEmpty();
     }
 
     public void validateData() {
         if (!isModel(this.model))
-            throw new IllegalArgumentException("Model name's should not be empty or shorter than 20 characters!");
+            throw new NotPossibleException("Model name's should not be empty or bigger than 20 characters!");
 
         if (!isYear(this.year))
-            throw new IllegalArgumentException("The year should begin with 1984!");
+            throw new NotPossibleException("The year should begin with 1984!");
 
         if (!isManufacturer(this.manufacturer))
-            throw new IllegalArgumentException(
-                    "Manufacturer name's should not be empty or shorter than 15 characters!");
+            throw new NotPossibleException("Manufacturer name's should not be empty or bigger than 15 characters!");
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(Object o) {
+        if (this == o)
             return true;
-        if (!(obj instanceof Object))
+        if (!(o instanceof Object))
             return false;
 
-        PC pc = (PC) obj;
+        PC pc = (PC) o;
         return this.year == pc.year
                 && this.model.equals(pc.model)
                 && this.manufacturer.equals(pc.manufacturer)
@@ -90,9 +94,7 @@ public class PC {
 
         if (getComps().isEmpty()) {
             components.append("[]");
-        }
-
-        else {
+        } else {
             int lastCharPos = 99 - (3 + 1 + 20 + 1 + 6 + 1 + 15 + 1) - 4;
 
             for (char c : getComps().getElements().toString().toCharArray()) {
@@ -100,7 +102,7 @@ public class PC {
 
                 if (components.length() == lastCharPos) {
                     components.append("...]");
-                    break;  
+                    break;
                 }
             }
         }
