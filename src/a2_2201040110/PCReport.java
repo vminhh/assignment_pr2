@@ -26,10 +26,11 @@ public class PCReport {
                         components.append("...]");
                         break;
                     }
-
+                    
                     components.append(c);
                 }
             }
+
             report.append(String.format("%3d %20s %6d %15s %s\n", ++idx,
                     pc.getModel(), pc.getYear(), pc.getManufacturer(), components.toString()));
         }
