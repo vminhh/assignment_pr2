@@ -63,7 +63,7 @@ public class PC {
         return s == null || s.trim().isEmpty();
     }
 
-    public void validateData() {
+    public void validateData() throws NotPossibleException {
         if (!isModel(this.model))
             throw new NotPossibleException("Model name's should not be empty or bigger than 20 characters!");
 
@@ -90,23 +90,6 @@ public class PC {
 
     @Override
     public String toString() {
-        StringBuilder components = new StringBuilder();
-
-        if (getComps().isEmpty()) {
-            components.append("[]");
-        } else {
-            int lastCharPos = 99 - (3 + 1 + 20 + 1 + 6 + 1 + 15 + 1) - 4;
-
-            for (char c : getComps().getElements().toString().toCharArray()) {
-                components.append(c);
-
-                if (components.length() == lastCharPos) {
-                    components.append("...]");
-                    break;
-                }
-            }
-        }
-
-        return String.format("%20s %6d %15s %s", getModel(), getYear(), getManufacturer(), components.toString());
+        return "PC<" + this.model + ", " + this.year + ", " + this.manufacturer + ", " + this.comps + ">";
     }
 }

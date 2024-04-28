@@ -8,13 +8,30 @@ public class PCReport {
         }
 
         StringBuilder report = new StringBuilder();
-        
+
         report.append(hyphens).append("\n")
                 .append(String.format("%56s\n", "PCPROG REPORT"))
                 .append(hyphens).append("\n");
 
-        for (int i = 0; i < objs.length; i++) {
-            report.append(String.format("%3d %s\n", i + 1, objs[i].toString()));
+        int idx = 0;
+        for (PC pc : objs) {
+            StringBuilder components = new StringBuilder();
+
+            if (pc.getComps().isEmpty()) {
+                components.append("[]");
+            } else {
+                int charLimited = 99 - 3 - 1 - 20 - 1 - 6 - 1 - 15 - 1 - 4;
+                for (char c : pc.getComps().getElements().toString().toCharArray()) {
+                    if (components.length() == charLimited) {
+                        components.append("...]");
+                        break;
+                    }
+
+                    components.append(c);
+                }
+            }
+            report.append(String.format("%3d %20s %6d %15s %s\n", ++idx,
+                    pc.getModel(), pc.getYear(), pc.getManufacturer(), components.toString()));
         }
 
         return report.append(hyphens).toString();

@@ -57,12 +57,12 @@ public class PCProg {
             }
 
             pc.addComp(comp);
-            ++idx;
+            idx++;
         }
 
         if (!getObjects().isEmpty()) {
-            for (PC obj : getObjects().getElements()) {
-                if (obj.equals(pc)) {
+            for (PC o : getObjects().getElements()) {
+                if (o.equals(pc)) {
                     System.out.println("PC is already exist!!");
                     break;
                 }
